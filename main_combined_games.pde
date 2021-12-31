@@ -22,16 +22,16 @@ String userHome = System.getProperty("user.home")+"/documents/combined/";
 boolean updating;
 PImage update1;
 void setup() {
-  backup();
-  updating=boolean(loadBytes(userHome+"updating.bin")[0]);
-  if (updating) {
-    surface.setVisible(false);
-    update();
-    updating=false;
-    byte[] temp={byte(updating)};
-    saveBytes(userHome+"updating.bin", temp);
-    exit();
-  }
+  //backup();
+  //updating=boolean(loadBytes(userHome+"updating.bin")[0]);
+  //if (updating) {
+  //  surface.setVisible(false);
+  //  update();
+  //  updating=false;
+  //  byte[] temp={byte(updating)};
+  //  saveBytes(userHome+"updating.bin", temp);
+  //  exit();
+  //}
   reset();
   for (int x=0; x<=2; x++) {
     for (int y=0; y<=2; y++) {
@@ -178,13 +178,13 @@ void mousePressed() {
     snakeselection=true;
     gameSelection=false;
   }
-  if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection&&loadBytes(userHome+"updating.bin")[1]!=1) {
-    update1();
-    updating=true;
-    byte[] temp={byte(updating)};
-    saveBytes(userHome+"updating.bin", temp);
-    exit();
-  }
+  //if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection&&loadBytes(userHome+"updating.bin")[1]!=1) {
+  //  update1();
+  //  updating=true;
+  //  byte[] temp={byte(updating)};
+  //  saveBytes(userHome+"updating.bin", temp);
+  //  exit();
+  //}
   if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn*2&&mouseY<height/gamesPerColumn*3&&gameSelection) {
     checkers=true;
     gameSelection=false;
