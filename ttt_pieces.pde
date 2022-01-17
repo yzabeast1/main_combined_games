@@ -9,20 +9,6 @@ void pieces() {
       }
     }
   }
-  //for (int x=0; x<=2; x++) {
-  //  for (int y=0; y<=2; y++) {
-  //    if (TTTboard[x][y]==3) {
-  //      stroke(100);
-  //      fill(255);
-  //      line(25+x*200, 25+y*200, 125+x*200, 125+y*200);
-  //      line(25+x*200, 125+y*200, 125+x*200, 25+y*200);
-  //      fill(128);
-  //      rect(25+x*200, 25+y*200, 100, 100);
-  //      fill(0);
-  //      stroke(1);
-  //    }
-  //  }
-  //}
      if (TTTboard[0][0] == 3) {
    fill(255);
    rotate(radians(315));

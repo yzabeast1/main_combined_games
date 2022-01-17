@@ -18,7 +18,7 @@ int gamesPerColumn=3;
 int mainTime;
 int autosaveTime=1000;
 String[] update;
-String userHome = System.getProperty("user.home")+"/documents/combined/";
+String userHome = System.getProperty("user.home")+"/library/Application Support/Combined Games/";
 boolean updating;
 PImage update1;
 void setup() {
@@ -38,7 +38,10 @@ void setup() {
       TTTboard[x][y]=1;
     }
   }
+  //size(displayWidth, displayHeight);
+  //surface.setResizable(true);
   fullScreen();
+  surface.setTitle("Combined Games Made By Yzabeast1");
   gameSelectionScreen();
   pipeBottom=loadImage("pipe bottom.png");
   pipeTop=loadImage("pipe top.png");
@@ -50,15 +53,17 @@ void setup() {
     xh[a]=ceil(random(50, 400));
   }
   snakeSetup();
-  mmSetup();
-  msetup();
   nwsnakeSetup();  
   nwmmsnakeSetup();
 }
 void draw() {
   mainTime++;
   if (mainTime%autosaveTime==0) {
-    save();
+    //  save();
+    println("autoSave", millis());
+  }
+  if (gameSelection) {
+    gameSelectionScreen();
   }
   if (mancala) {
     mancalaDraw();
@@ -88,10 +93,10 @@ void draw() {
     snakeSelectionDraw();
   }
   if (mirrorMovements) {
-    mmDraw();
+    snakeDraw();
   }
   if (mirrorMode) {
-    mdraw();
+    snakeDraw();
   }
   if (snakeNoWalls) {
     nwsnakeDraw();
@@ -123,7 +128,7 @@ void mousePressed() {
     snakeMousePressed();
   }
   if (mirrorMovements) {
-    mmMousePressed();
+    snakeMousePressed();
   }
   if (snakeselection) {
     snakeSelectionMousePressed();
@@ -212,14 +217,8 @@ void keyPressed() {
   if (pente) {
     penteKeyPressed();
   }
-  if (snakemultiplayer) {
+  if (snakemultiplayer||mirrorMovements||mirrorMode) {
     snakeKeyPressed();
-  }
-  if (mirrorMovements) {
-    mmKeyPressed();
-  }
-  if (mirrorMode) {
-    mkeyPressed();
   }
   if (snakeselection) {
     snakeSelectionKeyPressed();
@@ -318,6 +317,10 @@ void save() {
   saveBytes(userHome+"fbhighscore.bin", byte(bhscore));
   byte[] snakehs={byte(snakehscore), byte(msnakehscore), byte(mmsnakehscore), byte(nwsnakehscore)};  
   saveBytes(userHome+"snakehighscore.bin", snakehs);
+  byte[] yahtzee0=byte(score[0]);
+  byte[] yahtzee1=byte(score[1]);
+  yahtzee0=concat(yahtzee0, yahtzee1);
+  saveBytes(userHome+"yahtzee.bin", yahtzee0);
 }
 void load() {
   for (int a=0; a<=2; a++) {
@@ -348,4 +351,9 @@ void load() {
   msnakehscore=loadBytes(userHome+"snakehighscore.bin")[1];
   mmsnakehscore=loadBytes(userHome+"snakehighscore.bin")[2];
   nwsnakehscore=loadBytes(userHome+"snakehighscore.bin")[3];
+  for (int a=0; a<=1; a++) {
+    for (int b=0; b<=17; b++) {
+      score[a][b]=int(loadBytes(userHome+"yahtzee.bin"))[a*18+b];
+    }
+  }
 }

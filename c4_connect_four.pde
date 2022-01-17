@@ -11,11 +11,10 @@ boolean player2win=false;
 boolean redTurn=true;
 void connectFourSetup() {
   textSize(50);
-  fullScreen();
   background(255, 255, 0);
   board();
   fill(255, 0, 0);
-  circle(width/2, 800, 150);
+  circle(width/2, height*8/9, 150);
   textAlign(CENTER, CENTER);
 }
 void connectFourDraw() {
@@ -29,7 +28,6 @@ void connectFourDraw() {
   }
   circle(width/2, 800, 150);
   C4_win();
-  print(player1win, player2win);
 }
 void connectFourMousePressed() {
   clickCircles();//done

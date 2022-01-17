@@ -1,17 +1,3 @@
-//int mancalas[0] = 0;
-//int mancalas[1] = 0;
-//int holes[0] = 4;
-//int holes[1] = 4;
-//int holes[2] = 4;
-//int holes[3] = 4;
-//int holes[4] = 4;
-//int holes[5] = 4;
-//int holes[6] = 4;
-//int holes[7] = 4;
-//int holes[8] = 4;
-//int holes[9] = 4;
-//int holes[10] = 4;
-//int holes[11] = 4;
 int chole;
 int holemove=0;
 int total;
@@ -21,7 +7,6 @@ int[] mancalas=new int[2];
 void mancalaSetup() {
   nameChange[0]=false;
   nameChange[1]=false;
-  fullScreen();
 }
 void mancalaDraw() {
   textSize(50);
@@ -119,5 +104,40 @@ void mancalaKeyPressed() {
     return;
   } else if (bottomNameSelect) {
     name2 += key;
+  }
+}
+void movePieces() {
+  if (holes[0]==0&&holes[1]==0&&holes[2]==0&holes[3]==0&holes[4]==0&&holes[5]==0) {
+    for (int a=11; a>=6; a--) {
+      while (holes[a]>0) {
+        holes[a]--;
+        mancalas[0]++;
+      }
+    }
+  }
+  if (holes[6]==0&&holes[7]==0&&holes[8]==0&holes[9]==0&holes[10]==0&&holes[11]==0) {
+    for (int a=0; a<=5; a++) {
+      while (holes[a]>0) {
+        holes[a]--;
+        mancalas[1]++;
+      }
+    }
+  }
+}
+void winText() {
+  if (holes[0]==0&&holes[1]==0&&holes[2]==0&holes[3]==0&holes[4]==0&&holes[5]==0&&holes[6]==0&&holes[7]==0&&holes[8]==0&holes[9]==0&holes[10]==0&&holes[11]==0) {
+    fill(0);
+    if (mancalas[0]>mancalas[1]) {
+      textAlign(CENTER, CENTER);
+      text(name1+" Wins!!", width/2, height/2);
+    }
+    if (mancalas[0]<mancalas[1]) {
+      textAlign(CENTER, CENTER);
+      text(name2+" Wins!!", width/2, height/2);
+    }
+    if (mancalas[0]==mancalas[1]) {
+      textAlign(CENTER, CENTER);
+      text("Tie Game!!", width/2, height/2);
+    }
   }
 }

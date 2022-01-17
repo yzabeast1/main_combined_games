@@ -25,7 +25,6 @@ int[] nwmmtaily1=new int[nwmmtailSize];
 int[] nwmmtemp={0};
 boolean nwmmtwoplayer=false;
 void nwmmsnakeSetup() {
-  fullScreen();
   for (int a=0; a<=nwmmtailSize-1; a++) {
     nwmmtailx[a]=20;
     nwmmtaily[a]=20+a;

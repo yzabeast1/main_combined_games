@@ -22,7 +22,6 @@ boolean pause = false;
 
 void gameOfLifeSetup() {
   //  size (640, 360);
-  fullScreen();
   // Instantiate arrays 
   cells = new int[width/cellSize][height/cellSize];
   cellsBuffer = new int[width/cellSize][height/cellSize];

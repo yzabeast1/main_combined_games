@@ -29,6 +29,7 @@ void snakeSelectionMousePressed() {
   if (mouseX>width/snakeGamesPerRow&&mouseX<width/snakeGamesPerRow*2&&mouseY<height/snakeGamesPerColumn&&snakeselection) {
     mirrorMode=true;
     snakeselection=false;
+    twoplayer=true;
   }
   if (mouseX<width/snakeGamesPerRow&&mouseY>height/snakeGamesPerColumn&&mouseY<height/snakeGamesPerColumn*2&&snakeselection) {
     mirrorMovements=true;

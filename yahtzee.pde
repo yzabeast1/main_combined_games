@@ -10,12 +10,22 @@ int lastAdded=0;
 boolean[] diceLocked=new boolean[5];
 PImage locked;
 PImage unlocked;
+int[] dicex=new int[5];
+int[] dicey=new int[5];
+int[] spintime=new int[5];
+int[] rotation=new int[5];
+int defaultRotation=20;//in degrees
+int defaultSpinTime=1000;//in milliseconds
+int startingRollTime=-999999999;
 void yahtzeeSetup() {
+  for (int a=0; a<=4; a++) {
+    dicex[a]=width/2-40;
+    dicey[a]=a*110+height/2-225;
+  }
   locked=loadImage("locked.png");
   unlocked=loadImage("unlocked.png");
   yahtzeeBoard=loadImage("board.png");
   int b=1;
-  fullScreen();
   background(255, 165, 0);
   for (int a=0; a<=5; a++) {
     diceImages[a]=loadImage("dice-"+b+".png");
@@ -44,18 +54,6 @@ void yahtzeeDraw() {
   background(255, 165, 0);
   textSize(50);
   textAlign(CENTER, CENTER);
-  for (int a=0; a<=4; a++) {
-    for (int b=0; b<=5; b++) {
-      if (dice[a]==b) {
-        image(diceImages[b], width/2-90, a*110+height/2-275, 100, 100);
-      }
-    }
-    if (diceLocked[a]==true) {
-      image(unlocked, width/2+15, a*110+height/2-275, 75, 75);
-    } else {
-      image(locked, width/2+15, a*110+height/2-275, 75, 75);
-    }
-  }
   image(yahtzeeBoard, 10, 110);
   image(yahtzeeBoard, 812, 110);
   textSize(20);
@@ -108,6 +106,43 @@ void yahtzeeDraw() {
   fill(0);
   textSize(30);
   text("Full"+ENTER+"Roll", 720, 800);
+  for (int a=0; a<=4; a++) {
+    if (diceLocked[a]==true) {
+      image(unlocked, width/2+15, a*110+height/2-275, 75, 75);
+    } else {
+      image(locked, width/2+15, a*110+height/2-275, 75, 75);
+    }
+  }
+  for (int a=0; a<=4; a++) {
+    pushMatrix();
+    imageMode(CENTER);
+    if (millis()-startingRollTime<defaultSpinTime) {
+      translate(float(dicex[a]), float(dicey[a]));
+      if (a%2==0&&!diceLocked[a]) {
+        rotate(rotation[a]);
+      } else if (a%2==1&&!diceLocked[a]) {
+        rotate(-rotation[a]);
+      }
+      translate(float(-dicex[a]), float(-dicey[a]));
+      rotation[a]+=defaultRotation;
+      spintime[a]--;
+    }
+    if (spintime[a]==0) {
+      rotation[a]=0;
+    }
+    for (int b=0; b<=5; b++) {
+      if (dice[a]==b) {
+        image(diceImages[b], dicex[a], dicey[a], 100, 100);
+      }
+    }
+    if (a%2==0&&!diceLocked[a]) {
+      rotate(-rotation[a]);
+    } else if (a%2==1&&!diceLocked[a]) {
+      rotate(rotation[a]);
+    }    
+    imageMode(CORNER);
+    popMatrix();
+  }
 }
 
 void yahtzeeMousePressed() {
@@ -116,7 +151,9 @@ void yahtzeeMousePressed() {
     diceLocked=new boolean[5];
     for (int a=0; a<=4; a++) {
       dice[a]=floor(random(0, 6));
+      spintime[a]=defaultSpinTime;
     }
+    startingRollTime=millis();
   }
   if (mouseX>400&&mouseX<600&&mouseY>150&&mouseY<180) {
     nameChange[0]=true;
@@ -166,7 +203,9 @@ void yahtzeeKeyPressed() {
     for (int a=0; a<=4; a++) {
       if (diceLocked[a]==false) {
         dice[a]=floor(random(0, 6));
+        spintime[a]=defaultSpinTime;
       }
+      startingRollTime=millis();
     }
   }
   if (key=='r') {

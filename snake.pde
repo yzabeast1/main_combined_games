@@ -24,8 +24,12 @@ int[] tailx1=new int[tailSize];
 int[] taily1=new int[tailSize];
 int[] temp={0};
 boolean twoplayer=false;
+boolean snakepaused=false;
+int mmsnakehscore=0;
+int mmsnakescore=0;
+int msnakehscore=0;
+int msnakescore=0;
 void snakeSetup() {
-  fullScreen();
   for (int a=0; a<=tailSize-1; a++) {
     tailx[a]=20;
     taily[a]=20+a;
@@ -46,7 +50,7 @@ void snakeDraw() {
   if (!snakedead) {
     time++;
 
-    if (time%speed==0) {
+    if (time%speed==0&&!snakepaused) {
       for (int a=tailx.length-2; a>=0; a--) {
         tailx[a+1]=tailx[a];
         taily[a+1]=taily[a];
@@ -127,10 +131,22 @@ void snakeDraw() {
     if (headx==applex&&heady==appley) {
       applex=floor(random(0, 40));
       appley=floor(random(0, 40));
-      snakescore++;
+      if (snakemultiplayer) {
+        snakescore++;
+      } else if (mirrorMovements) {
+        mmsnakescore++;
+      } else if (mirrorMode) {
+        msnakescore++;
+      }
       tailSize++;
       if (snakescore>snakehscore) {
         snakehscore=snakescore;
+      }
+      if (mmsnakescore>mmsnakehscore) {
+        mmsnakehscore=mmsnakescore;
+      }
+      if (msnakescore>msnakehscore) {
+        msnakehscore=msnakescore;
       }
       int[] temp1={40};
       tailx=concat(tailx, temp1);
@@ -141,10 +157,22 @@ void snakeDraw() {
       if (headx1==applex&&heady1==appley) {
         applex=floor(random(0, 40));
         appley=floor(random(0, 40));
-        snakescore++;
+        if (snakemultiplayer) {
+          snakescore++;
+        } else if (mirrorMovements) {
+          mmsnakescore++;
+        } else if (mirrorMode) {
+          msnakescore++;
+        }
         tailSize1++;
         if (snakescore>snakehscore) {
           snakehscore=snakescore;
+        }
+        if (mmsnakescore>mmsnakehscore) {
+          mmsnakehscore=mmsnakescore;
+        }
+        if (msnakescore>msnakehscore) {
+          msnakehscore=msnakescore;
         }
         int[] temp1={40};
         tailx1=concat(tailx1, temp1);
@@ -183,24 +211,34 @@ void snakeDraw() {
   }
   fill(0);
   textSize(50);
-  text("Score: "+snakescore, 250, 850);
-  text("High Score: "+snakehscore, 750, 850);
+  if (snakemultiplayer) {
+    text("Score: "+snakescore, 250, 850);
+    text("High Score: "+snakehscore, 750, 850);
+  } else if (mirrorMovements) {
+    text("Score: "+mmsnakescore, 250, 850);
+    text("High Score: "+mmsnakehscore, 750, 850);
+  } else if (mirrorMode) {
+    text("Score: "+msnakescore, 250, 850);
+    text("High Score: "+msnakehscore, 750, 850);
+  }
   textAlign(CENTER, CENTER);
   text("Two Snakes", 1200, 175);
   if (snakedead) {
     text("You Died", 1100, 450);
   }
-  fill(255);
-  rect(1100, 200, 200, 200);
-  if (twoplayer) {
-    strokeWeight(10);
-    line(1130, 330, 1180, 380);
-    line(1180, 380, 1270, 250);
-    strokeWeight(1);
+  if (!mirrorMode) {
+    fill(255);
+    rect(1100, 200, 200, 200);
+    if (twoplayer) {
+      strokeWeight(10);
+      line(1130, 330, 1180, 380);
+      line(1180, 380, 1270, 250);
+      strokeWeight(1);
+    }
   }
 }
 void snakeKeyPressed() {      
-  if (twoplayer) {
+  if (twoplayer&&snakemultiplayer) {
     if (key=='w') {
       dirrection1='n';
     }
@@ -213,18 +251,66 @@ void snakeKeyPressed() {
     if (key=='a') {
       dirrection1='w';
     }
+  } else if (twoplayer&&mirrorMovements) {
+    if (key=='w') {
+      dirrection1='s';
+    }
+    if (key=='s') {
+      dirrection1='n';
+    }
+    if (key=='d') {
+      dirrection1='w';
+    }
+    if (key=='a') {
+      dirrection1='e';
+    }
   }
-  if (keyCode==UP) {
-    dirrection='n';
+  if (key==' ') {
+    snakepaused=!snakepaused;
   }
-  if (keyCode==DOWN) {
-    dirrection='s';
-  }
-  if (keyCode==RIGHT) {
-    dirrection='e';
-  }
-  if (keyCode==LEFT) {
-    dirrection='w';
+  if (snakemultiplayer) {
+    if (keyCode==UP) {
+      dirrection='n';
+    }
+    if (keyCode==DOWN) {
+      dirrection='s';
+    }
+    if (keyCode==RIGHT) {
+      dirrection='e';
+    }
+    if (keyCode==LEFT) {
+      dirrection='w';
+    }
+  } else if (mirrorMode) {
+    if (keyCode==UP) {
+      dirrection='n';
+      dirrection1='s';
+    }
+    if (keyCode==DOWN) {
+      dirrection='s';
+      dirrection1='n';
+    }
+    if (keyCode==RIGHT) {
+      dirrection='e';
+      dirrection1='w';
+    }
+    if (keyCode==LEFT) {
+      dirrection='w';
+      dirrection1='e';
+    }
+  } else if (mirrorMovements) {
+    if (keyCode==UP) {
+      dirrection='s';
+    }
+    if (keyCode==DOWN) {
+      dirrection='n';
+    }
+    if (keyCode==RIGHT) {
+      dirrection='w';
+    }
+    if (keyCode==LEFT) {
+      dirrection='e';
+    }
   }
   if (key=='r') {
     dirrection='n';
@@ -241,25 +327,36 @@ void snakeKeyPressed() {
     time=0;
     applex=floor(random(0, 40));
     appley=floor(random(0, 40));
-    snakescore=0;
-    // tailx=new int[tailSize];
-    //for (int a=0; a<=tailSize-1; a++) {
-    //  tailx[a]=20;
-    //  taily[a]=20+a;
-    //}
-    //  tailx1=new int[tailSize1];
-    //for (int a=0; a<=tailSize1-1; a++) {
-    //  tailx1[a]=10;
-    //  taily1[a]=20+a;
-    //}
+    if (snakemultiplayer) {
+      snakescore=0;
+    } else if (mirrorMovements) {
+      mmsnakescore=0;
+    } else if (mirrorMode) {
+      msnakescore=0;
+    }
+    tailx=new int[tailSize];
+    for (int a=0; a<=tailSize-1; a++) {
+      tailx[a]=20;
+      taily[a]=20+a;
+    }
+    tailx1=new int[tailSize1];
+    for (int a=0; a<=tailSize1-1; a++) {
+      tailx1[a]=10;
+      taily1[a]=20+a;
+    }
   }
+
   if (key=='g') {
     gameSelectionScreen();
     snakemultiplayer=false;
+    mirrorMovements=false;
+    mirrorMode=false;
   }
 }
 void snakeMousePressed() {
-  if (mouseX>1100&&mouseX<1300&&mouseY>200&&mouseY<400&&snakedead) {
-    twoplayer=!twoplayer;
+  if (!mirrorMode) {
+    if (mouseX>1100&&mouseX<1300&&mouseY>200&&mouseY<400&&snakedead) {
+      twoplayer=!twoplayer;
+    }
   }
 }
