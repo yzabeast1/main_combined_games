@@ -88,22 +88,14 @@ void CheckersKeyPressed() {
         redx[a+8*b]=200*a+50;
       }
     }
-    redy[0] = 50;
-    redy[1] = 50;
-    redy[2] = 50;
-    redy[3] = 50;
-    redy[4] = 150;
-    redy[5] = 150;
-    redy[6] = 150;
-    redy[7] = 150;
-    redy[8] = 250;
-    redy[9] = 250;
-    redy[10] = 250;
-    redy[11] = 250;
-    redx[4] = 150;
-    redx[5] = 350;
-    redx[6] = 550;
-    redx[7] = 750;
+    for (int b=0; b<=2; b++) {
+      for (int a=0; a<=3; a++) {
+        redy[a+b*4]=50+b*100;
+      }
+    }
+    for (int a=4; a<=7; a++) {
+      redx[a]=50+200*a-700;
+    }
     blackx[0] = 150;
     blacky[0] = 750;
     blackx[1] = 350;

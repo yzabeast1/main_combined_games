@@ -253,7 +253,7 @@ void gameSelectionScreen() {
   text("Flappy Bird", width/gamesPerRow/2+width/gamesPerRow, height/gamesPerColumn*2+(height/gamesPerColumn/2));
   text("Pente", width/gamesPerRow*2+(width/gamesPerRow/2), height/gamesPerColumn*2+(height/gamesPerColumn/2));
   text("Snake", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn/2);
-  text("Update"+ENTER+"Will Close Game", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn+(height/gamesPerColumn/2));
+  text("Update"+ENTER+"Will Close Game"+ENTER+ENTER+"Currenly Disabled", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn+(height/gamesPerColumn/2));
   text("Checkers", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn*2+(height/gamesPerColumn/2));
 }
 void save() {

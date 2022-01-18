@@ -70,13 +70,11 @@ void tttMousePressed() {
   }
 }
 void tttboard(int column, int row) {
-  /*if (xTurn) {
-   TTTboard[column][row]+=2;
-   xTurn=false;
-   }
-   else if (xTurn) {
-   TTTboard[column][row]++;
-   xTurn=true;
-   }*/
-  TTTboard[column][row]++;
+  if (xTurn) {
+    TTTboard[column][row]+=2;
+    xTurn=false;
+  } else if (!xTurn) {
+    TTTboard[column][row]++;
+    xTurn=true;
+  }
 }

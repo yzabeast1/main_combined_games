@@ -19,7 +19,7 @@ int defaultSpinTime=1000;//in milliseconds
 int startingRollTime=-999999999;
 void yahtzeeSetup() {
   for (int a=0; a<=4; a++) {
-    dicex[a]=width/2-40;
+    dicex[a]=width/2-32;
     dicey[a]=a*110+height/2-225;
   }
   locked=loadImage("locked.png");

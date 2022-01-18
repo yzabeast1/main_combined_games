@@ -186,7 +186,6 @@ void P_taking(int b, int a) {
       P_board[a+1][b]=0;
       P_board[a+2][b]=0;
       P_blackTaken+=2;
-      print("taken3");
     }
   }
   if (a>=3) {
@@ -194,7 +193,6 @@ void P_taking(int b, int a) {
       P_board[a-1][b]=0;
       P_board[a-2][b]=0;
       P_blackTaken+=2;
-      print("taken3");
     }
   }
   if (b<=15) {
@@ -202,7 +200,6 @@ void P_taking(int b, int a) {
       P_board[a][b+1]=0;
       P_board[a][b+2]=0;
       P_blackTaken+=2;
-      print("taken4");
     }
   }
   if (b>=3) {
@@ -210,11 +207,9 @@ void P_taking(int b, int a) {
       P_board[a][b-1]=0;
       P_board[a][b-2]=0;
       P_blackTaken+=2;
-      print("taken4");
     }
   }
   if (a<=15&&b<=15) {
-    println(P_board[a][b], P_board[a+1][b+1], P_board[a+2][b+2], P_board[a+3][b+3]);
     if (P_board[a][b]==P_board[a+3][b+3]&&P_board[a+1][b+1]==P_board[a+2][b+2]&&P_board[a][b]==2&&P_board[a+1][b+1]==1) {
       P_board[a+1][b+1]=0;
       P_board[a+2][b+2]=0;

@@ -1,6 +1,5 @@
 int chole;
 int holemove=0;
-int total;
 boolean bottomNameSelect;
 int[] holes={4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
 int[] mancalas=new int[2];
@@ -19,37 +18,20 @@ void mancalaDraw() {
   text(name1, width/2, 100);
   text(name2, width/2, 825);
   fill(255);
-  circle(300, 200, 100);
-  circle(450, 200, 100);
-  circle(600, 200, 100);
-  circle(750, 200, 100);
-  circle(900, 200, 100);
-  circle(1050, 200, 100);
-  circle(300, 700, 100);
-  circle(450, 700, 100);
-  circle(600, 700, 100);
-  circle(750, 700, 100);
-  circle(900, 700, 100);
-  circle(1050, 700, 100);
+  for (int a=0; a<=1; a++) {
+    for (int b=0; b<=5; b++) {
+      fill(255);
+      circle(300+150*b, 200+500*a, 100);
+      fill(0);
+      text(holes[a*6+b], 300+150*b, 200+500*a);
+      fill(255);
+    }
+  }
   ellipse(100, 450, 100, 800);
   ellipse(1250, 450, 100, 800);
   fill(0);
-  text(holes[0], 300, 200);
-  text(holes[1], 450, 200);
-  text(holes[2], 600, 200);
-  text(holes[3], 750, 200);
-  text(holes[4], 900, 200);
-  text(holes[5], 1050, 200);
-  text(holes[6], 1050, 700);
-  text(holes[7], 900, 700);
-  text(holes[8], 750, 700);
-  text(holes[9], 600, 700);
-  text(holes[10], 450, 700);
-  text(holes[11], 300, 700);
   text(mancalas[0], 100, 450);
   text(mancalas[1], 1250, 450);
-  total=holes[0]+holes[1]+holes[2]+holes[3]+holes[4]+holes[5]+holes[6]+holes[7]+holes[8]+holes[9]+holes[10]+holes[11]+mancalas[0]+mancalas[1];
-  //  text(total, 600, 100);
   movePieces();
   winText();
 }
@@ -74,18 +56,9 @@ void mancalaKeyPressed() {
   if (key=='r'&& !nameChange[0]&&!bottomNameSelect) {
     mancalas[0] = 0;
     mancalas[1] = 0;
-    holes[0] = 4;
-    holes[1] = 4;
-    holes[2] = 4;
-    holes[3] = 4;
-    holes[4] = 4;
-    holes[5] = 4;
-    holes[6] = 4;
-    holes[7] = 4;
-    holes[8] = 4;
-    holes[9] = 4;
-    holes[10] = 4;
-    holes[11] = 4;
+    for (int a=0; a<=11; a++) {
+      holes[a]=4;
+    }
   }
   if (key == BACKSPACE&&nameChange[0]) {
     if (name1.length() > 0) {
