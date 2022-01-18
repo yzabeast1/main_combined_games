@@ -29,6 +29,10 @@ int mmsnakehscore=0;
 int mmsnakescore=0;
 int msnakehscore=0;
 int msnakescore=0;
+int nwsnakescore=0;
+int nwsnakehscore=0;
+int nwmmsnakescore=0;
+int nwmmsnakehscore=0;
 void snakeSetup() {
   for (int a=0; a<=tailSize-1; a++) {
     tailx[a]=20;
@@ -69,40 +73,80 @@ void snakeDraw() {
           taily1[0]=heady1;
         }
       }
-      if (dirrection=='n'&&heady>0) {
-        heady--;
-      } else if (dirrection=='n'&&heady==0) {
-        snakedead=true;
-      } else if (dirrection=='s'&&heady<39) {
-        heady++;
-      } else if (dirrection=='s'&&heady==39) {
-        snakedead=true;
-      } else if (dirrection=='e'&&headx<39) {
-        headx++;
-      } else if (dirrection=='e'&&headx==39) {
-        snakedead=true;
-      } else if (dirrection=='w'&&headx>0) {
-        headx--;
-      } else if (dirrection=='w'&&headx==0) {
-        snakedead=true;
+      if (!snakeNoWalls&&!snakeNoWallsMirrorMovements) {
+        if (dirrection=='n'&&heady>0) {
+          heady--;
+        } else if (dirrection=='n'&&heady==0) {
+          snakedead=true;
+        } else if (dirrection=='s'&&heady<39) {
+          heady++;
+        } else if (dirrection=='s'&&heady==39) {
+          snakedead=true;
+        } else if (dirrection=='e'&&headx<39) {
+          headx++;
+        } else if (dirrection=='e'&&headx==39) {
+          snakedead=true;
+        } else if (dirrection=='w'&&headx>0) {
+          headx--;
+        } else if (dirrection=='w'&&headx==0) {
+          snakedead=true;
+        }
+      } else if (snakeNoWalls||snakeNoWallsMirrorMovements) {
+        if (dirrection=='n'&&heady>0) {
+          heady--;
+        } else if (dirrection=='n'&&heady==0) {
+          heady=39;
+        } else if (dirrection=='s'&&heady<39) {
+          heady++;
+        } else if (dirrection=='s'&&heady==39) {
+          heady=0;
+        } else if (dirrection=='e'&&headx<39) {
+          headx++;
+        } else if (dirrection=='e'&&headx==39) {
+          headx=0;
+        } else if (dirrection=='w'&&headx>0) {
+          headx--;
+        } else if (dirrection=='w'&&headx==0) {
+          headx=39;
+        }
       }
       if (twoplayer) {
-        if (dirrection1=='n'&&heady1>0) {
-          heady1--;
-        } else if (dirrection1=='n'&&heady1==0) {
-          snakedead=true;
-        } else if (dirrection1=='s'&&heady1<39) {
-          heady1++;
-        } else if (dirrection1=='s'&&heady1==39) {
-          snakedead=true;
-        } else if (dirrection1=='e'&&headx1<39) {
-          headx1++;
-        } else if (dirrection1=='e'&&headx1==39) {
-          snakedead=true;
-        } else if (dirrection1=='w'&&headx1>0) {
-          headx1--;
-        } else if (dirrection1=='w'&&headx1==0) {
-          snakedead=true;
+        if (!snakeNoWalls&&!snakeNoWallsMirrorMovements) {
+          if (dirrection1=='n'&&heady1>0) {
+            heady1--;
+          } else if (dirrection1=='n'&&heady1==0) {
+            snakedead=true;
+          } else if (dirrection1=='s'&&heady1<39) {
+            heady1++;
+          } else if (dirrection1=='s'&&heady1==39) {
+            snakedead=true;
+          } else if (dirrection1=='e'&&headx1<39) {
+            headx1++;
+          } else if (dirrection1=='e'&&headx1==39) {
+            snakedead=true;
+          } else if (dirrection1=='w'&&headx1>0) {
+            headx1--;
+          } else if (dirrection1=='w'&&headx1==0) {
+            snakedead=true;
+          }
+        } else if (snakeNoWalls||snakeNoWallsMirrorMovements) {
+          if (dirrection1=='n'&&heady1>0) {
+            heady1--;
+          } else if (dirrection1=='n'&&heady1==0) {
+            heady1=39;
+          } else if (dirrection1=='s'&&heady1<39) {
+            heady1++;
+          } else if (dirrection1=='s'&&heady1==39) {
+            heady1=0;
+          } else if (dirrection1=='e'&&headx1<39) {
+            headx1++;
+          } else if (dirrection1=='e'&&headx1==39) {
+            headx1=0;
+          } else if (dirrection1=='w'&&headx1>0) {
+            headx1--;
+          } else if (dirrection1=='w'&&headx1==0) {
+            headx1=39;
+          }
         }
       }
       for (int a=0; a<tailx.length; a++) {
@@ -137,6 +181,10 @@ void snakeDraw() {
         mmsnakescore++;
       } else if (mirrorMode) {
         msnakescore++;
+      } else if (snakeNoWalls) {
+        nwsnakescore++;
+      } else if (snakeNoWallsMirrorMovements) {
+        nwmmsnakescore++;
       }
       tailSize++;
       if (snakescore>snakehscore) {
@@ -147,6 +195,12 @@ void snakeDraw() {
       }
       if (msnakescore>msnakehscore) {
         msnakehscore=msnakescore;
+      }
+      if (nwsnakescore>nwsnakehscore) {
+        nwsnakehscore=nwsnakescore;
+      }
+      if (nwmmsnakescore>nwmmsnakehscore) {
+        nwmmsnakehscore=nwmmsnakescore;
       }
       int[] temp1={40};
       tailx=concat(tailx, temp1);
@@ -163,6 +217,10 @@ void snakeDraw() {
           mmsnakescore++;
         } else if (mirrorMode) {
           msnakescore++;
+        } else if (snakeNoWalls) {
+          nwsnakescore++;
+        } else if (snakeNoWallsMirrorMovements) {
+          nwmmsnakescore++;
         }
         tailSize1++;
         if (snakescore>snakehscore) {
@@ -173,6 +231,12 @@ void snakeDraw() {
         }
         if (msnakescore>msnakehscore) {
           msnakehscore=msnakescore;
+        }
+        if (nwsnakescore>nwsnakehscore) {
+          nwsnakehscore=nwsnakescore;
+        }
+        if (nwmmsnakescore>nwmmsnakehscore) {
+          nwmmsnakehscore=nwmmsnakescore;
         }
         int[] temp1={40};
         tailx1=concat(tailx1, temp1);
@@ -220,6 +284,12 @@ void snakeDraw() {
   } else if (mirrorMode) {
     text("Score: "+msnakescore, 250, 850);
     text("High Score: "+msnakehscore, 750, 850);
+  } else if (snakeNoWalls) {
+    text("Score: "+nwsnakescore, 250, 850);
+    text("High Score: "+nwsnakehscore, 750, 850);
+  } else if (snakeNoWallsMirrorMovements) {
+    text("Score: "+nwmmsnakescore, 250, 850);
+    text("High Score: "+nwmmsnakehscore, 750, 850);
   }
   textAlign(CENTER, CENTER);
   text("Two Snakes", 1200, 175);
@@ -238,7 +308,7 @@ void snakeDraw() {
   }
 }
 void snakeKeyPressed() {      
-  if (twoplayer&&snakemultiplayer) {
+  if (twoplayer&&(snakemultiplayer||snakeNoWalls)) {
     if (key=='w') {
       dirrection1='n';
     }
@@ -251,7 +321,7 @@ void snakeKeyPressed() {
     if (key=='a') {
       dirrection1='w';
     }
-  } else if (twoplayer&&mirrorMovements) {
+  } else if (twoplayer&&(mirrorMovements||snakeNoWallsMirrorMovements)) {
     if (key=='w') {
       dirrection1='s';
     }
@@ -268,7 +338,7 @@ void snakeKeyPressed() {
   if (key==' ') {
     snakepaused=!snakepaused;
   }
-  if (snakemultiplayer) {
+  if (snakemultiplayer||snakeNoWalls) {
     if (keyCode==UP) {
       dirrection='n';
     }
@@ -298,7 +368,7 @@ void snakeKeyPressed() {
       dirrection='w';
       dirrection1='e';
     }
-  } else if (mirrorMovements) {
+  } else if (mirrorMovements||snakeNoWallsMirrorMovements) {
     if (keyCode==UP) {
       dirrection='s';
     }
@@ -333,6 +403,10 @@ void snakeKeyPressed() {
       mmsnakescore=0;
     } else if (mirrorMode) {
       msnakescore=0;
+    } else if (snakeNoWalls) {
+      nwsnakescore=0;
+    } else if (snakeNoWallsMirrorMovements) {
+      nwmmsnakescore=0;
     }
     tailx=new int[tailSize];
     for (int a=0; a<=tailSize-1; a++) {
@@ -351,6 +425,8 @@ void snakeKeyPressed() {
     snakemultiplayer=false;
     mirrorMovements=false;
     mirrorMode=false;
+    snakeNoWalls=false;
+    snakeNoWallsMirrorMovements=false;
   }
 }
 void snakeMousePressed() {

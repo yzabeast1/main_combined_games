@@ -2,7 +2,7 @@ int chole;
 int holemove=0;
 int total;
 boolean bottomNameSelect;
-int[] holes={4,4,4,4,4,4,4,4,4,4,4,4};
+int[] holes={4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
 int[] mancalas=new int[2];
 void mancalaSetup() {
   nameChange[0]=false;

@@ -53,8 +53,6 @@ void setup() {
     xh[a]=ceil(random(50, 400));
   }
   snakeSetup();
-  nwsnakeSetup();  
-  nwmmsnakeSetup();
 }
 void draw() {
   mainTime++;
@@ -86,23 +84,11 @@ void draw() {
   if (pente) {
     penteDraw();
   }
-  if (snakemultiplayer) {
+  if (snakemultiplayer||mirrorMovements||mirrorMode||snakeNoWalls||snakeNoWallsMirrorMovements) {
     snakeDraw();
   }
   if (snakeselection) {
     snakeSelectionDraw();
-  }
-  if (mirrorMovements) {
-    snakeDraw();
-  }
-  if (mirrorMode) {
-    snakeDraw();
-  }
-  if (snakeNoWalls) {
-    nwsnakeDraw();
-  }
-  if (snakeNoWallsMirrorMovements) {
-    nwmmsnakeDraw();
   }
   if (checkers) {
     CheckersDraw();
@@ -124,20 +110,11 @@ void mousePressed() {
   if (pente) {
     penteMousePressed();
   }
-  if (snakemultiplayer) {
-    snakeMousePressed();
-  }
-  if (mirrorMovements) {
+  if (snakemultiplayer||mirrorMovements||snakeNoWalls||snakeNoWallsMirrorMovements) {
     snakeMousePressed();
   }
   if (snakeselection) {
     snakeSelectionMousePressed();
-  }
-  if (snakeNoWalls) {
-    nwsnakeMousePressed();
-  }
-  if (snakeNoWallsMirrorMovements) {
-    nwmmsnakeMousePressed();
   }
   if (mouseX<width/gamesPerRow&&mouseY<height/gamesPerColumn&&gameSelection) {
     mancala=true;
@@ -217,17 +194,11 @@ void keyPressed() {
   if (pente) {
     penteKeyPressed();
   }
-  if (snakemultiplayer||mirrorMovements||mirrorMode) {
+  if (snakemultiplayer||mirrorMovements||mirrorMode||snakeNoWalls||snakeNoWallsMirrorMovements) {
     snakeKeyPressed();
   }
   if (snakeselection) {
     snakeSelectionKeyPressed();
-  }
-  if (snakeNoWalls) {
-    nwsnakeKeyPressed();
-  }
-  if (snakeNoWallsMirrorMovements) {
-    nwmmsnakeKeyPressed();
   }
   if (checkers) {
     CheckersKeyPressed();
