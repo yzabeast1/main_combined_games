@@ -21,7 +21,14 @@ String[] update;
 String userHome = System.getProperty("user.home")+"/library/Application Support/Combined Games/";
 boolean updating;
 PImage update1;
+textBox name1box;
+textBox name2box;
 void setup() {
+  yahtzeeStartup();
+  name1box=new textBox(-1, -1, 0, 0);
+  name2box=new textBox(-1, -1, 0, 0);
+  name1box.text="Player 1";
+  name2box.text="Player 2";
   //backup();
   //updating=boolean(loadBytes(userHome+"updating.bin")[0]);
   //if (updating) {
@@ -35,7 +42,7 @@ void setup() {
   reset();
   for (int x=0; x<=2; x++) {
     for (int y=0; y<=2; y++) {
-      TTTboard[x][y]=1;
+      TTTCboard[x][y]=1;
     }
   }
   //size(displayWidth, displayHeight);
@@ -257,7 +264,7 @@ void gameSelectionScreen() {
   text("Checkers", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn*2+(height/gamesPerColumn/2));
 }
 void save() {
-  String[] names={name1, name2};
+  String[] names={name1box.text, name2box.text};
   byte[] boardByte;
   saveStrings(userHome+"names.txt", names);
   int[] mancalaHoles={holes[0], holes[1], holes[2], holes[3], holes[4], holes[5], holes[6], holes[7], holes[8], holes[9], holes[10], holes[11], mancalas[0], mancalas[1]};
@@ -280,27 +287,34 @@ void save() {
   boardByte=concat(boardByte, temp);
   saveBytes(userHome+"mancala.bin", mancalaholes);
   saveBytes(userHome+"c4board.bin", boardByte);
-  byte[] ttt=byte(TTTboard[0]);
-  ttt=concat(ttt, byte(TTTboard[1]));
-  ttt=concat(ttt, byte(TTTboard[2]));
+  byte[] ttt=byte(TTTCboard[0]);
+  ttt=concat(ttt, byte(TTTCboard[1]));
+  ttt=concat(ttt, byte(TTTCboard[2]));
   saveBytes(userHome+"ttt.bin", ttt);
   int[] bhscore={hscore};
   saveBytes(userHome+"fbhighscore.bin", byte(bhscore));
   byte[] snakehs={byte(snakehscore), byte(msnakehscore), byte(mmsnakehscore), byte(nwsnakehscore)};  
   saveBytes(userHome+"snakehighscore.bin", snakehs);
-  byte[] yahtzee0=byte(score[0]);
-  byte[] yahtzee1=byte(score[1]);
-  yahtzee0=concat(yahtzee0, yahtzee1);
-  saveBytes(userHome+"yahtzee.bin", yahtzee0);
+  byte[] yahtzee={};
+  for (int a=0; a<=1; a++) {
+    for (int b=0; b<=17; b++) {
+      byte[] temp1={byte(yscores[a][b].value)};
+      concat(yahtzee, temp1);
+    }
+  }
+  ////byte[] yahtzee0=byte(score[0]);
+  ////byte[] yahtzee1=byte(score[1]);
+  //yahtzee0=concat(yahtzee0, yahtzee1);
+  saveBytes(userHome+"yahtzee.bin", yahtzee);
 }
 void load() {
   for (int a=0; a<=2; a++) {
     for (int b=0; b<=2; b++) {
-      TTTboard[a][b]=int(loadBytes(userHome+"ttt.bin"))[a*3+b];
+      TTTCboard[a][b]=char(loadBytes(userHome+"ttt.bin"))[a*3+b];
     }
   }
-  name1=loadStrings(userHome+"names.txt")[0];
-  name2=loadStrings(userHome+"names.txt")[1];
+  name1box.text=loadStrings(userHome+"names.txt")[0];
+  name2box.text=loadStrings(userHome+"names.txt")[1];
   mancalas[0]=loadBytes(userHome+"mancala.bin")[12];
   mancalas[1]=loadBytes(userHome+"mancala.bin")[13];
   for (int a=0; a<=11; a++) {
@@ -324,7 +338,7 @@ void load() {
   nwsnakehscore=loadBytes(userHome+"snakehighscore.bin")[3];
   for (int a=0; a<=1; a++) {
     for (int b=0; b<=17; b++) {
-      score[a][b]=int(loadBytes(userHome+"yahtzee.bin"))[a*18+b];
+      yscores[a][b].value=int(loadBytes(userHome+"yahtzee.bin"))[a*18+b];
     }
   }
 }

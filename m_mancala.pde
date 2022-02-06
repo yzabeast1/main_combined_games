@@ -4,19 +4,17 @@ boolean bottomNameSelect;
 int[] holes={4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
 int[] mancalas=new int[2];
 void mancalaSetup() {
-  nameChange[0]=false;
-  nameChange[1]=false;
+  name1box.changeLocation(width/2-200,75,400,50);
+  name2box.changeLocation(width/2-200,800,400,50);
+  name1box.changing=false;
+  name2box.changing=false;
+  name1box.boxVisible=true;
+  name2box.boxVisible=true;
 }
 void mancalaDraw() {
   textSize(50);
   textAlign(CENTER, CENTER);
   background(176, 150, 79);
-  fill(255);
-  rect(width/2-200, 75, 400, 50);
-  rect(width/2-200, 800, 400, 50);
-  fill(0);
-  text(name1, width/2, 100);
-  text(name2, width/2, 825);
   fill(255);
   for (int a=0; a<=1; a++) {
     for (int b=0; b<=5; b++) {
@@ -34,50 +32,28 @@ void mancalaDraw() {
   text(mancalas[1], 1250, 450);
   movePieces();
   winText();
+  name1box.show();
+  name2box.show();
 }
 void mancalaMousePressed() {
   movingup();
   movingdown();
-  if (mouseX>width/2-200&&mouseY>75&&mouseX<width/2+200&&mouseY<125) {
-    nameChange[0]=true;
-  } else {
-    nameChange[0]=false;
-  }
-  if (mouseX>width/2-200&&mouseY>800&&mouseX<width/2+200&&mouseY<850) {
-    bottomNameSelect=true;
-  } else {
-    bottomNameSelect=false;
-  }
+  name1box.mousePressed();
+  name2box.mousePressed();
 }
 void mancalaKeyPressed() {
-  if (key == 'g'&&!nameChange[0]&&!bottomNameSelect) {
+  if (key == 'g'&&!name1box.changing&&!name2box.changing) {
     gameSelectionScreen();
   }
-  if (key=='r'&& !nameChange[0]&&!bottomNameSelect) {
+  if (key=='r'&&!name1box.changing&&!name2box.changing) {
     mancalas[0] = 0;
     mancalas[1] = 0;
     for (int a=0; a<=11; a++) {
       holes[a]=4;
     }
   }
-  if (key == BACKSPACE&&nameChange[0]) {
-    if (name1.length() > 0) {
-      name1 = name1.substring(0, name1.length()-1);
-    }
-  } else if (key == CODED&&nameChange[0]) {
-    return;
-  } else if (nameChange[0]) {
-    name1 += key;
-  }
-  if (key == BACKSPACE&&bottomNameSelect) {
-    if (name2.length() > 0) {
-      name2 = name2.substring(0, name2.length()-1);
-    }
-  } else if (key == CODED&&bottomNameSelect) {
-    return;
-  } else if (bottomNameSelect) {
-    name2 += key;
-  }
+  name1box.keyPressed();
+  name2box.keyPressed();
 }
 void movePieces() {
   if (holes[0]==0&&holes[1]==0&&holes[2]==0&holes[3]==0&holes[4]==0&&holes[5]==0) {
@@ -102,11 +78,11 @@ void winText() {
     fill(0);
     if (mancalas[0]>mancalas[1]) {
       textAlign(CENTER, CENTER);
-      text(name1+" Wins!!", width/2, height/2);
+      text(name1box.text+" Wins!!", width/2, height/2);
     }
     if (mancalas[0]<mancalas[1]) {
       textAlign(CENTER, CENTER);
-      text(name2+" Wins!!", width/2, height/2);
+      text(name2box.text+" Wins!!", width/2, height/2);
     }
     if (mancalas[0]==mancalas[1]) {
       textAlign(CENTER, CENTER);

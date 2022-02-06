@@ -28,6 +28,13 @@ void connectFourDraw() {
   }
   circle(width/2, 800, 150);
   C4_win();
+  fill(0);
+  if (player1win) {
+    text("Red Wins!", 1150, 800);
+  }
+  if (player2win) {    
+    text("Black Wins!", 1150, 800);
+  }
 }
 void connectFourMousePressed() {
   clickCircles();//done
