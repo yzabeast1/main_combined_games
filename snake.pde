@@ -10,8 +10,6 @@ int headx=20;
 int heady=20;
 int headx1=10;
 int heady1=20;
-color snakeColor=#000000;
-color snakeColor1=#0000FF;
 int time=0;
 int applex=floor(random(0, 40));
 int appley=floor(random(0, 40));
@@ -252,7 +250,7 @@ void snakeDraw() {
       } else if (grid1[a][b]) {
         fill(snakeColor1);
       } else if (a==applex&&b==appley) {
-        fill(255, 0, 0);
+        fill(appleColor);
       } else {
         fill(255);
       }

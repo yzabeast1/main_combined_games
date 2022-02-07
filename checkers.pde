@@ -51,12 +51,12 @@ void Cboard() {
   }
 }
 void circles() {
-  fill(0);
+  fill(c_black);
   for (int a=0; a<=11; a++) {
     stroke(255);
     circle(blackx[a], blacky[a], 80);
   }
-  fill(255, 0, 0);
+  fill(c_red);
   for (int a=0; a<=11; a++) {
     stroke(0);
     circle(redx[a], redy[a], 80);

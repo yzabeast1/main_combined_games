@@ -13,7 +13,7 @@ void connectFourSetup() {
   textSize(50);
   background(255, 255, 0);
   board();
-  fill(255, 0, 0);
+  fill(c4_red);
   circle(width/2, height*8/9, 150);
   textAlign(CENTER, CENTER);
 }
@@ -22,9 +22,9 @@ void connectFourDraw() {
   background(255, 255, 0);
   board();//done
   if (redTurn) {
-    fill(255, 0, 0);
+    fill(c4_red);
   } else if (!redTurn) {
-    fill(0);
+    fill(c4_black);
   }
   circle(width/2, 800, 150);
   C4_win();
@@ -134,7 +134,7 @@ void colorCircles(int cols, int rows) {
   if (board[cols][rows]==0) {
     fill(128);
   } else if (board[cols][rows]==1) {
-    fill(255, 0, 0);
+    fill(c4_red);
   } else if (board[cols][rows]==2) {
     fill(0);
   }
@@ -194,10 +194,10 @@ void resetCircles() {
 void switchTurn() {
   if (redTurn) {
     redTurn=false;
-    fill(0);
+    fill(c4_black);
   } else if (!redTurn) {
     redTurn=true;
-    fill(255, 0, 0);
+    fill(c4_red);
   }
   circle(width/2, 800, 150);
 }

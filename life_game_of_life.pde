@@ -1,17 +1,3 @@
-// Size of cells
-int cellSize = 15;
-
-// How likely for a cell to be alive at start (in percentage)
-float probabilityOfAliveAtStart = 15;
-
-// Variables for timer
-int interval = 100;
-int lastRecordedTime = 0;
-
-// Colors for active/inactive cells
-color alive = color(0, 200, 0);
-color dead = color(0);
-
 // Array of cells
 int[][] cells; 
 // Buffer to record the state of the cells and use this while changing the others in the interations
@@ -19,6 +5,10 @@ int[][] cellsBuffer;
 
 // Pause
 boolean pause = false;
+
+// Variables for timer
+int interval = 100;
+int lastRecordedTime = 0;
 
 void gameOfLifeSetup() {
   //  size (640, 360);

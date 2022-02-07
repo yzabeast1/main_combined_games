@@ -1,5 +1,3 @@
-int snakeGamesPerRow=4;
-int snakeGamesPerColumn=3;
 void snakeSelectionDraw() {
   background(0, 255, 255);
   fill(0, 255, 0);
