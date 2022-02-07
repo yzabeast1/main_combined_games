@@ -12,11 +12,8 @@ boolean mirrorMovements=false;
 boolean mirrorMode=false;
 boolean snakeNoWalls=false;
 boolean snakeNoWallsMirrorMovements=false;
-boolean checkers=false; 
-int mainTime;
-String[] update;
-boolean updating;
-PImage update1;
+boolean checkers=false;
+boolean pong=false;
 textBox name1box;
 textBox name2box;
 void setup() {
@@ -25,16 +22,6 @@ void setup() {
   name2box=new textBox(-1, -1, 0, 0);
   name1box.text=defaultPlayerNames[0];
   name2box.text=defaultPlayerNames[1];
-  //backup();
-  //updating=boolean(loadBytes(saveLocation+"updating.bin")[0]);
-  //if (updating) {
-  //  surface.setVisible(false);
-  //  update();
-  //  updating=false;
-  //  byte[] temp={byte(updating)};
-  //saveBytes(saveLocation+"updating.bin", temp);
-  //  exit();
-  //}
   reset();
   //size(displayWidth, displayHeight);
   //surface.setResizable(true);
@@ -51,13 +38,9 @@ void setup() {
     xh[a]=ceil(random(50, 400));
   }
   snakeSetup();
+  pongSetup();
 }
 void draw() {
-  mainTime++;
-  if (mainTime%autosaveTime==0) {
-    //  save();
-    println("autoSave", millis());
-  }
   if (gameSelection)gameSelectionScreen();
   if (mancala)mancalaDraw();
   if (connectFour)connectFourDraw();
@@ -69,6 +52,7 @@ void draw() {
   if (snakemultiplayer||mirrorMovements||mirrorMode||snakeNoWalls||snakeNoWallsMirrorMovements)snakeDraw();
   if (snakeselection)snakeSelectionDraw();
   if (checkers)CheckersDraw();
+  if (pong)pongDraw();
 }
 void mousePressed() {
   if (mancala)mancalaMousePressed();
@@ -91,4 +75,5 @@ void keyPressed() {
   if (snakemultiplayer||mirrorMovements||mirrorMode||snakeNoWalls||snakeNoWallsMirrorMovements)snakeKeyPressed();
   if (snakeselection)snakeSelectionKeyPressed();
   if (checkers)CheckersKeyPressed();
+  if (pong)pongKeyPressed();
 }

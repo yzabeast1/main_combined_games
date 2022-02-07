@@ -9,6 +9,7 @@ void gameSelectionScreen() {
   checkers=false;
   snakemultiplayer=false;
   snakeselection=false;
+  pong=false;
   background(0, 255, 255);
   fill(0, 255, 0);
   rect(0, 0, width/gamesPerRow, height/gamesPerColumn);
@@ -47,7 +48,7 @@ void gameSelectionScreen() {
   text("Flappy Bird", width/gamesPerRow/2+width/gamesPerRow, height/gamesPerColumn*2+(height/gamesPerColumn/2));
   text("Pente", width/gamesPerRow*2+(width/gamesPerRow/2), height/gamesPerColumn*2+(height/gamesPerColumn/2));
   text("Snake", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn/2);
-  text("Update"+ENTER+"Will Close Game"+ENTER+ENTER+"Currenly Disabled", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn+(height/gamesPerColumn/2));
+  text("Pong", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn+(height/gamesPerColumn/2));
   text("Checkers", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn*2+(height/gamesPerColumn/2));
 }
 void gameSelectionMousePressed() {
@@ -76,16 +77,12 @@ void gameSelectionMousePressed() {
     gameSelection=false;
     yahtzeeSetup();
   }
-  if (mouseX>width/gamesPerRow*2&&mouseX<width/gamesPerRow*3&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection) {
-    load();
-  }
+  if (mouseX>width/gamesPerRow*2&&mouseX<width/gamesPerRow*3&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection)load();
   if (mouseX>width/gamesPerRow&&mouseX<width/gamesPerRow*2&&mouseY>height/gamesPerColumn*2&&mouseY<height/gamesPerColumn*3&&gameSelection) {
     flappyBird=true;
     gameSelection=false;
   }
-  if (mouseX<width/gamesPerRow&&mouseY>height/gamesPerColumn*2&&mouseY<height/gamesPerColumn*3&&gameSelection) {
-    save();
-  }
+  if (mouseX<width/gamesPerRow&&mouseY>height/gamesPerColumn*2&&mouseY<height/gamesPerColumn*3&&gameSelection)save();
   if (mouseX>width/gamesPerRow*2&&mouseX<width/gamesPerRow*3&&mouseY>height/gamesPerColumn*2&&mouseY<height/gamesPerColumn*3&&gameSelection) {
     pente=true;
     penteSetup();
@@ -95,15 +92,12 @@ void gameSelectionMousePressed() {
     snakeselection=true;
     gameSelection=false;
   }
-  //if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection&&loadBytes(saveLocation+"updating.bin")[1]!=1) {
-  //  update1();
-  //  updating=true;
-  //  byte[] temp={byte(updating)};
-  //  saveBytes(saveLocation+"updating.bin", temp);
-  //  exit();
-  //}
   if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn*2&&mouseY<height/gamesPerColumn*3&&gameSelection) {
     checkers=true;
+    gameSelection=false;
+  }
+  if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection) {
+    pong=true;
     gameSelection=false;
   }
 }

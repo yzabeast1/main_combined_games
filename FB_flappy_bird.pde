@@ -31,24 +31,14 @@ void FBdraw() {
         x[a]+=distanceBetweenPairs*5;
         xh[a]=ceil(random(50, 500));
       }
-      if (x[a]==65||x[a]==64) {
-        FBscore++;
-      }
+      if (x[a]==65||x[a]==64)FBscore++;
     }
     fill(255);
     y-=gravity;
-    if (gravity<-2) {
-      gravity++;
-    }
-    if (gravity>-2) {
-      gravity--;
-    }
-    if (y<0) {
-      FBdead=true;
-    }
-    if (y>600-35) {
-      FBdead=true;
-    }
+    if (gravity<-2)gravity++;
+    if (gravity>-2)gravity--;
+    if (y<0)FBdead=true;
+    if (y>600-35)FBdead=true;
     for (int a=0; a<5; a++) {
       if (y<xh[a]&&x[a]<150&&x[a]>50) {
         FBdead=true;
@@ -64,20 +54,12 @@ void FBdraw() {
   textSize(50);
   text("Score: "+FBscore, 120, 750);
   text("High Score: "+hscore, 420, 750);
-  if (FBdead) {
-    if (FBscore>hscore) {
-      hscore=FBscore;
-    }
-  }
+  if (FBdead&&FBscore>hscore)hscore=FBscore;
 }
 void FBkeyPressed() {
   if (!FBdead) {
-    if (key=='w'||keyCode==UP) {
-      gravity=4;
-    }
-    if (key=='s'||keyCode==DOWN) {
-      gravity=-8;
-    }
+    if (key=='w'||keyCode==UP)gravity=4;
+    if (key=='s'||keyCode==DOWN)gravity=-8;
     if (key=='g') {
       gameSelectionScreen();
       flappyBird=false;
