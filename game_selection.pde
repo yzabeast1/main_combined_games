@@ -11,29 +11,29 @@ void gameSelectionScreen() {
   snakeselection=false;
   pong=false;
   background(0, 255, 255);
-  fill(0, 255, 0);
+  fill(GameColors[0]);
   rect(0, 0, width/gamesPerRow, height/gamesPerColumn);
-  fill(0, 0, 255);
+  fill(GameColors[1]);
   rect(width/gamesPerRow, 0, width/gamesPerRow, height/gamesPerColumn);
-  fill(255, 0, 0);
-  rect(0, height/gamesPerColumn, width/gamesPerRow, height/gamesPerColumn);
-  fill(255, 255, 0);
-  rect(width/gamesPerRow, height/gamesPerColumn, width/gamesPerRow, height/gamesPerColumn);
-  fill(255, 165, 0);
+  fill(GameColors[2]);
   rect(width/gamesPerRow*2, 0, width/gamesPerRow, height/gamesPerColumn);
-  fill(#026401);
-  rect(width/gamesPerRow*2, height/gamesPerColumn, width/gamesPerRow, height/gamesPerColumn);
-  fill(#FFCD00);
-  rect(width/gamesPerRow, height/gamesPerColumn*2, width/gamesPerRow, height/gamesPerColumn);
-  fill(#00FFCA);
-  rect(0, height/gamesPerColumn*2, width/gamesPerRow, height/gamesPerColumn);
-  fill(#FF03FB);
-  rect(width/gamesPerRow*2, height/gamesPerColumn*2, width/gamesPerRow, height/gamesPerColumn);
-  fill(#A09DAD);
+  fill(GameColors[3]);
   rect(width/gamesPerRow*3, 0, width/gamesPerRow, height/gamesPerColumn);
-  fill(#AA03FF);
+  fill(GameColors[4]);
+  rect(0, height/gamesPerColumn, width/gamesPerRow, height/gamesPerColumn);
+  fill(GameColors[5]);
+  rect(width/gamesPerRow, height/gamesPerColumn, width/gamesPerRow, height/gamesPerColumn);
+  fill(GameColors[6]);
+  rect(width/gamesPerRow*2, height/gamesPerColumn, width/gamesPerRow, height/gamesPerColumn);
+  fill(GameColors[7]);
   rect(width/gamesPerRow*3, height/gamesPerColumn, width/gamesPerRow, height/gamesPerColumn);
-  fill(#24EDA7);
+  fill(GameColors[8]);
+  rect(0, height/gamesPerColumn*2, width/gamesPerRow, height/gamesPerColumn);
+  fill(GameColors[9]);
+  rect(width/gamesPerRow, height/gamesPerColumn*2, width/gamesPerRow, height/gamesPerColumn);
+  fill(GameColors[10]);
+  rect(width/gamesPerRow*2, height/gamesPerColumn*2, width/gamesPerRow, height/gamesPerColumn);
+  fill(GameColors[11]);
   rect(width/gamesPerRow*3, height/gamesPerColumn*2, width/gamesPerRow, height/gamesPerColumn);
   fill(0);
   textSize(width/gamesPerRow/10);
@@ -49,7 +49,7 @@ void gameSelectionScreen() {
   text("Pente", width/gamesPerRow*2+(width/gamesPerRow/2), height/gamesPerColumn*2+(height/gamesPerColumn/2));
   text("Snake", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn/2);
   text("Pong", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn+(height/gamesPerColumn/2));
-  text("Checkers", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn*2+(height/gamesPerColumn/2));
+  text("Page 2", width/gamesPerRow*3+(width/gamesPerRow/2), height/gamesPerColumn*2+(height/gamesPerColumn/2));
 }
 void gameSelectionMousePressed() {
   if (mouseX<width/gamesPerRow&&mouseY<height/gamesPerColumn&&gameSelection) {
@@ -93,11 +93,55 @@ void gameSelectionMousePressed() {
     gameSelection=false;
   }
   if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn*2&&mouseY<height/gamesPerColumn*3&&gameSelection) {
-    checkers=true;
+    gamesPage2=true;
     gameSelection=false;
   }
   if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection) {
     pong=true;
     gameSelection=false;
   }
+}
+void gamesPage2MousePressed() {
+  if (mouseX<width/gamesPerRow&&mouseY<height/gamesPerColumn&&gamesPage2) {
+    checkers=true;
+    gamesPage2=false;
+  }
+  if (mouseX<width/gamesPerRow&&mouseY>height/gamesPerColumn*2&&mouseY<height/gamesPerColumn*3&&gamesPage2) {
+    gameSelection=true;
+    gamesPage2=false;
+  }  
+  if (mouseX<width/gamesPerRow&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gamesPage2) {
+    minesweeper=true;
+    gamesPage2=false;
+  }
+}
+void gameSelectionKeyPressed() {
+  changePage();
+}
+void gamesPage2Draw() {
+  background(0, 255, 255);
+  fill(GameColors[0]);
+  rect(0, 0, width/gamesPerRow, height/gamesPerColumn);
+  fill(GameColors[4]);
+  rect(0, height/gamesPerColumn, width/gamesPerRow, height/gamesPerColumn);
+  fill(GameColors[8]);
+  rect(0, height/gamesPerColumn*2, width/gamesPerRow, height/gamesPerColumn);
+  fill(0);
+  text("Checkers", width/gamesPerRow/2, height/gamesPerColumn/2);
+  text("Page 1", width/gamesPerRow/2, height/gamesPerColumn*2+(height/gamesPerColumn/2));
+  text("Minesweeper", width/gamesPerRow/2, height/gamesPerColumn+(height/gamesPerColumn/2));
+}
+void changePage() {
+  if (key=='1') {
+    resetAll();
+    gameSelection=true;
+  }
+  if (key=='2') {
+    resetAll();
+    gamesPage2=true;
+  }
+}
+void resetAll() {
+  gameSelection=false;
+  gamesPage2=false;
 }

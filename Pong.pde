@@ -8,7 +8,7 @@ int scoreRight = 0;
 
 void pongSetup() {
   ball = new Ball(width/2, height/2, 50); //create a new ball to the center of the window
-  ball.speedX = 3; // Giving the ball speed in x-axis
+  ball.speedX = 5; // Giving the ball speed in x-axis
   ball.speedY = random(-3, 3); // Giving the ball speed in y-axis
 
   paddleLeft = new Paddle(15, height/2, 30, 200);
@@ -96,12 +96,6 @@ void pongKeyPressed() {
   if (keyCode == DOWN) {
     paddleRight.speedY=5;
   }
-  //if(key == 'a'){
-  //  paddleLeft.speedY=-3;
-  //}
-  //if(key == 'z'){
-  //  paddleLeft.speedY=3;
-  //}
   if (key=='r') {
     ball = new Ball(width/2, height/2, 50); //create a new ball to the center of the window
     ball.speedX = 5; // Giving the ball speed in x-axis
@@ -124,12 +118,6 @@ void keyReleased() {
   if (keyCode == DOWN) {
     paddleRight.speedY=0;
   }
-  //if(key == 'a'){
-  //  paddleLeft.speedY=0;
-  //}
-  //if(key == 'z'){
-  //  paddleLeft.speedY=0;
-  //}
 }
 
 

@@ -1,15 +1,17 @@
+int snakeGamesPerRow=4;
+int snakeGamesPerColumn=3;
 void snakeSelectionDraw() {
   background(0, 255, 255);
-  fill(0, 255, 0);
+  fill(GameColors[0]);
   rect(0, 0, width/snakeGamesPerRow, height/snakeGamesPerColumn);
-  fill(0, 0, 255);
+  fill(GameColors[1]);
   rect(width/snakeGamesPerRow, 0, width/snakeGamesPerRow, height/snakeGamesPerColumn);
-  fill(255, 0, 0);
-  rect(0, height/snakeGamesPerColumn, width/snakeGamesPerRow, height/snakeGamesPerColumn);
-  fill(255, 255, 0);
-  rect(width/snakeGamesPerRow, height/snakeGamesPerColumn, width/snakeGamesPerRow, height/snakeGamesPerColumn);
-  fill(255, 165, 0);
+  fill(GameColors[2]);
   rect(width/snakeGamesPerRow*2, 0, width/snakeGamesPerRow, height/snakeGamesPerColumn);
+  fill(GameColors[4]);
+  rect(0, height/snakeGamesPerColumn, width/snakeGamesPerRow, height/snakeGamesPerColumn);
+  fill(GameColors[5]);
+  rect(width/snakeGamesPerRow, height/snakeGamesPerColumn, width/snakeGamesPerRow, height/snakeGamesPerColumn);
   fill(0);
   textSize(width/snakeGamesPerRow/10);
   textAlign(CENTER, CENTER);

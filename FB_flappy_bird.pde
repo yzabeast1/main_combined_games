@@ -11,7 +11,6 @@ PImage bottom;
 boolean FBdead=false;
 int FBscore=0;
 int hscore=0;
-
 void FBdraw() {
   background(0, 255, 0);
   image(background, 0, 0, 600, 800);

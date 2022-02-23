@@ -1,0 +1,53 @@
+{
+    "global": {
+        "Default Player Names": [
+            "Player 1",
+            "Player 2"
+        ],
+        "Game Colors":[
+            [0,255,0],
+            [0,0,255],
+            [255,165,0],
+            [160, 157, 173],
+            [255,0,0],
+            [255,255,0],
+            [2,100,1],
+            [171, 3, 255],
+            [0,255,204],
+            [255,205,0],
+            [255, 3, 251],
+            [36, 237, 167]
+        ]
+    },
+    "Conway's Game Of Life": {
+        "Cell Size": 15,
+        "Probability Of Alive At Start": 15,
+        "Alive Color": [0,200,0],
+        "Dead Color": [0,0,0]
+    },
+    "Pente": {
+        "Player 1 Color": [255,0,0],
+        "Player 2 Color": [0,0,0]
+    },
+    "Connect Four": {
+        "Player 1 Color": [255,0,0],
+        "Player 2 Color": [0,0,0]
+    },
+    "Checkers": {
+        "Player 1 Color": [255,0,0],
+        "Player 2 Color": [0,0,0]
+    },
+    "Snake": {
+        "First Snake Color": [0,0,0],
+        "Second Snake Color": [0,0,255],
+        "Apple Color": [255,0,0]
+    },
+    "Yahtzee": {
+        "Rotation": 20,
+        "Spin Time": 1000
+    },
+    "Minesweeper": {
+        "Size": 40,
+        "Mine Percent": 15
+    }
+}

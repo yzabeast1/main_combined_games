@@ -1,43 +1,43 @@
-//configurable variables
-  //global
-    String saveLocation = System.getProperty("user.home")+"/library/Application Support/Combined Games/";
-    //games per row and column on game selection screen
-      int gamesPerRow=4;
-      int gamesPerColumn=3;
-    //how often to autosave(in loops through draw)
-      int autosaveTime=1000;
-    //player staring names
-      String[] defaultPlayerNames={"Player 1", "Player 2"};
-  //conway's game of life
-    // Size of cells
-      int cellSize = 15;
-    // How likely for a cell to be alive at start (in percentage)
-      float probabilityOfAliveAtStart = 15;
-    // Colors for active/inactive cells
-      color alive = color(0, 200, 0);
-      color dead = color(0);
-  //pente
-    //colors of pieces
-      color P_red=#FF0000;
-      color P_black=#000000;
-  //connect four
-    //colors of pieces
-      color c4_red=#FF0000;
-      color c4_black=#000000;
-  //checkers
-    //colors of pieces
-      color c_red=#FF0000;
-      color c_black=#000000;
-  //snake
-    //number of rows and columns on snake selection screen
-      int snakeGamesPerRow=4;
-      int snakeGamesPerColumn=3;
-    //color of main snake
-      color snakeColor=#000000;
-    //color of second snake
-      color snakeColor1=#0000FF;
-    //apple color
-      color appleColor=#FF0000;
-    //yahtzee
-      int defaultRotation=20;//in degrees
-      int defaultSpinTime=1000;//in milliseconds
+String[] defaultPlayerNames={"Player 1", "Player 2"};
+int cellSize = 15;
+float probabilityOfAliveAtStart = 15;
+color alive = color(0, 200, 0);
+color dead = color(0);
+color P_red=#FF0000;
+color P_black=#000000;
+color c4_red=#FF0000;
+color c4_black=#000000;
+color c_red=#FF0000;
+color c_black=#000000;
+color snakeColor=#000000;
+color snakeColor1=#0000FF;
+color appleColor=#FF0000;
+int defaultRotation=20;
+int defaultSpinTime=1000;
+float spacing=40;
+float minePercent=30;
+void loadConfig() {
+  JSONObject config=loadJSONObject("config.json");
+  defaultPlayerNames[0]=config.getJSONObject("global").getJSONArray("Default Player Names").getString(0);
+  defaultPlayerNames[1]=config.getJSONObject("global").getJSONArray("Default Player Names").getString(1);
+  cellSize=config.getJSONObject("Conway's Game Of Life").getInt("Cell Size");
+  probabilityOfAliveAtStart=config.getJSONObject("Conway's Game Of Life").getInt("Probability Of Alive At Start");
+  alive=color(config.getJSONObject("Conway's Game Of Life").getJSONArray("Alive Color").getInt(0), config.getJSONObject("Conway's Game Of Life").getJSONArray("Alive Color").getInt(1), config.getJSONObject("Conway's Game Of Life").getJSONArray("Alive Color").getInt(2));
+  dead=color(config.getJSONObject("Conway's Game Of Life").getJSONArray("Dead Color").getInt(0), config.getJSONObject("Conway's Game Of Life").getJSONArray("Dead Color").getInt(1), config.getJSONObject("Conway's Game Of Life").getJSONArray("Dead Color").getInt(2));
+  P_red=color(config.getJSONObject("Pente").getJSONArray("Player 1 Color").getInt(0), config.getJSONObject("Pente").getJSONArray("Player 1 Color").getInt(1), config.getJSONObject("Pente").getJSONArray("Player 1 Color").getInt(2));
+  P_black=color(config.getJSONObject("Pente").getJSONArray("Player 2 Color").getInt(0), config.getJSONObject("Pente").getJSONArray("Player 2 Color").getInt(1), config.getJSONObject("Pente").getJSONArray("Player 2 Color").getInt(2));
+  c4_red=color(config.getJSONObject("Connect Four").getJSONArray("Player 1 Color").getInt(0), config.getJSONObject("Connect Four").getJSONArray("Player 1 Color").getInt(1), config.getJSONObject("Connect Four").getJSONArray("Player 1 Color").getInt(2));
+  c4_black=color(config.getJSONObject("Connect Four").getJSONArray("Player 2 Color").getInt(0), config.getJSONObject("Connect Four").getJSONArray("Player 2 Color").getInt(1), config.getJSONObject("Connect Four").getJSONArray("Player 2 Color").getInt(2));
+  c_red=color(config.getJSONObject("Checkers").getJSONArray("Player 1 Color").getInt(0), config.getJSONObject("Checkers").getJSONArray("Player 1 Color").getInt(1), config.getJSONObject("Checkers").getJSONArray("Player 1 Color").getInt(2));
+  c_black=color(config.getJSONObject("Checkers").getJSONArray("Player 2 Color").getInt(0), config.getJSONObject("Checkers").getJSONArray("Player 2 Color").getInt(1), config.getJSONObject("Checkers").getJSONArray("Player 2 Color").getInt(2));
+  snakeColor=color(config.getJSONObject("Snake").getJSONArray("First Snake Color").getInt(0), config.getJSONObject("Snake").getJSONArray("First Snake Color").getInt(1), config.getJSONObject("Snake").getJSONArray("First Snake Color").getInt(2));
+  snakeColor1=color(config.getJSONObject("Snake").getJSONArray("Second Snake Color").getInt(0), config.getJSONObject("Snake").getJSONArray("Second Snake Color").getInt(1), config.getJSONObject("Snake").getJSONArray("Second Snake Color").getInt(2));
+  appleColor=color(config.getJSONObject("Snake").getJSONArray("Apple Color").getInt(0), config.getJSONObject("Snake").getJSONArray("Apple Color").getInt(1), config.getJSONObject("Snake").getJSONArray("Apple Color").getInt(2));
+  defaultRotation=config.getJSONObject("Yahtzee").getInt("Rotation");
+  defaultSpinTime=config.getJSONObject("Yahtzee").getInt("Spin Time");
+  spacing=config.getJSONObject("Minesweeper").getInt("Size");
+  minePercent=config.getJSONObject("Minesweeper").getInt("Mine Percent");
+  for (int i=0; i<12; i++) {
+    GameColors[i]=color(config.getJSONObject("global").getJSONArray("Game Colors").getJSONArray(i).getInt(0), config.getJSONObject("global").getJSONArray("Game Colors").getJSONArray(i).getInt(1), config.getJSONObject("global").getJSONArray("Game Colors").getJSONArray(i).getInt(2));
+  }
+}

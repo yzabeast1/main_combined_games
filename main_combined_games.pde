@@ -14,8 +14,14 @@ boolean snakeNoWalls=false;
 boolean snakeNoWallsMirrorMovements=false;
 boolean checkers=false;
 boolean pong=false;
+boolean gamesPage2=false;
+boolean minesweeper=false;
+color[] GameColors=new color[12];
 textBox name1box;
 textBox name2box;
+String saveLocation = System.getProperty("user.home")+"/library/Application Support/Combined Games/";
+int gamesPerRow=4;
+int gamesPerColumn=3;
 void setup() {
   yahtzeeStartup();
   name1box=new textBox(-1, -1, 0, 0);
@@ -39,9 +45,12 @@ void setup() {
   }
   snakeSetup();
   pongSetup();
+  minesweeperSetup();
+  loadConfig();
 }
 void draw() {
   if (gameSelection)gameSelectionScreen();
+  if (gamesPage2)gamesPage2Draw();
   if (mancala)mancalaDraw();
   if (connectFour)connectFourDraw();
   if (gameOfLife)gameOfLifeDraw();
@@ -53,6 +62,7 @@ void draw() {
   if (snakeselection)snakeSelectionDraw();
   if (checkers)CheckersDraw();
   if (pong)pongDraw();
+  if (minesweeper)minesweeperDraw();
 }
 void mousePressed() {
   if (mancala)mancalaMousePressed();
@@ -62,7 +72,9 @@ void mousePressed() {
   if (pente)penteMousePressed();
   if (snakemultiplayer||mirrorMovements||snakeNoWalls||snakeNoWallsMirrorMovements) snakeMousePressed();
   if (snakeselection)snakeSelectionMousePressed();
+  if (minesweeper)minesweeperMousePressed();
   if (gameSelection)gameSelectionMousePressed();
+  if (gamesPage2)gamesPage2MousePressed();
 }
 void keyPressed() {
   if (mancala)mancalaKeyPressed();
@@ -76,4 +88,6 @@ void keyPressed() {
   if (snakeselection)snakeSelectionKeyPressed();
   if (checkers)CheckersKeyPressed();
   if (pong)pongKeyPressed();
+  if (minesweeper)minesweeperKeyPressed();
+  if (gameSelection||gamesPage2)gameSelectionKeyPressed();
 }
