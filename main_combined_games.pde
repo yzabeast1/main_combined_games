@@ -19,6 +19,7 @@ boolean minesweeper=false;
 color[] GameColors=new color[12];
 textBox name1box;
 textBox name2box;
+String[] defaultPlayerNames={"Player 1", "Player 2"};
 String saveLocation = System.getProperty("user.home")+"/library/Application Support/Combined Games/";
 int gamesPerRow=4;
 int gamesPerColumn=3;

@@ -9,6 +9,8 @@ int[][] board={
 boolean player1win=false;
 boolean player2win=false;
 boolean redTurn=true;
+color c4_red=#FF0000;
+color c4_black=#000000;
 void connectFourSetup() {
   textSize(50);
   background(255, 255, 0);

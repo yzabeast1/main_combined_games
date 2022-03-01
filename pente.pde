@@ -4,6 +4,8 @@ boolean P_player2win=false;
 boolean P_redTurn=false;
 int P_redTaken=0;
 int P_blackTaken=0;
+color P_red=#FF0000;
+color P_black=#000000;
 void penteSetup() {
   textSize(50);
   background(255, 255, 0);

@@ -4,7 +4,7 @@
             "Player 1",
             "Player 2"
         ],
-        "Game Colors":[
+        "Game Selection Colors":[
             [0,255,0],
             [0,0,255],
             [255,165,0],
@@ -21,7 +21,7 @@
     },
     "Conway's Game Of Life": {
         "Cell Size": 15,
-        "Probability Of Alive At Start": 15,
+        "Probability Of Cell Being Alive At Start": 15,
         "Alive Color": [0,200,0],
         "Dead Color": [0,0,0]
     },
@@ -43,11 +43,11 @@
         "Apple Color": [255,0,0]
     },
     "Yahtzee": {
-        "Rotation": 20,
-        "Spin Time": 1000
+        "Rotation In Degrees Per Draw Cycle": 20,
+        "Spin Time In Milliseconds": 1000
     },
     "Minesweeper": {
-        "Size": 40,
-        "Mine Percent": 15
+        "Cell Size": 40,
+        "Percent Of Cells To Be Mines": 15
     }
 }

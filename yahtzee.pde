@@ -10,6 +10,8 @@ int[] dicey=new int[5];
 int[] spintime=new int[5];
 int[] rotation=new int[5];
 int startingRollTime=-999999999;
+int defaultRotation=20;
+int defaultSpinTime=1000;
 void yahtzeeStartup() {
   for (int a=0; a<=17; a++) {
     for (int b=0; b<=1; b++) {

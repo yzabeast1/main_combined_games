@@ -31,6 +31,9 @@ int nwsnakescore=0;//no walls
 int nwsnakehscore=0;//no walls
 int nwmmsnakescore=0;
 int nwmmsnakehscore=0;
+color snakeColor=#000000;
+color snakeColor1=#0000FF;
+color appleColor=#FF0000;
 void snakeSetup() {
   for (int a=0; a<=tailSize-1; a++) {
     tailx[a]=20;

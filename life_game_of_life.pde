@@ -10,6 +10,10 @@ boolean pause = false;
 int interval = 100;
 int lastRecordedTime = 0;
 
+int cellSize = 15;
+float probabilityOfAliveAtStart = 15;
+color alive = color(0, 200, 0);
+color dead = color(0);
 void gameOfLifeSetup() {
   //  size (640, 360);
   // Instantiate arrays 

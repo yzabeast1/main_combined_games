@@ -7,6 +7,8 @@ PImage flaggedimage;
 PImage revealedimage;
 PImage[] numbers=new PImage[8];
 int minecount=1;
+float spacing=40;
+float minePercent=30;
 void minesweeperSetup() {
   cols = floor(width / spacing);
   rows = floor(height / spacing);

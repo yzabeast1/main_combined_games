@@ -11,6 +11,8 @@ boolean redWins=false;
 boolean blackWins=false;
 boolean[] blackkings=new boolean[12];
 boolean[] redkings=new boolean[12];
+color c_red=#FF0000;
+color c_black=#000000;
 void CheckersDraw() {
   textSize(40);
   textAlign(CENTER, CENTER);
