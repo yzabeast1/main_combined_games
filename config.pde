@@ -1,5 +1,5 @@
 void loadConfig() {
-  JSONObject config=loadJSONObject("config.json");
+  JSONObject config=loadJSONObject(saveLocation+"config.json");
   defaultPlayerNames[0]=config.getJSONObject("global").getJSONArray("Default Player Names").getString(0);
   defaultPlayerNames[1]=config.getJSONObject("global").getJSONArray("Default Player Names").getString(1);
   cellSize=config.getJSONObject("Conway's Game Of Life").getInt("Cell Size");

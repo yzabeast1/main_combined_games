@@ -20,10 +20,17 @@ color[] GameColors=new color[12];
 textBox name1box;
 textBox name2box;
 String[] defaultPlayerNames={"Player 1", "Player 2"};
+String OS = platformNames[platform];
 String saveLocation = System.getProperty("user.home")+"/library/Application Support/Combined Games/";
 int gamesPerRow=4;
 int gamesPerColumn=3;
 void setup() {
+  update();
+  if (OS=="macosx") {
+    saveLocation = System.getProperty("user.home")+"/library/Application Support/Combined Games/";
+  } else if (OS!="macosx") {
+    saveLocation = System.getProperty("user.home")+"/documents/Combined Games/";
+  }
   yahtzeeStartup();
   name1box=new textBox(-1, -1, 0, 0);
   name2box=new textBox(-1, -1, 0, 0);

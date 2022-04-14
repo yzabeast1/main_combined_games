@@ -1,0 +1,26 @@
+data/1.png
+data/2.png
+data/3.png
+data/4.png
+data/5.png
+data/6.png
+data/7.png
+data/8.png
+data/background.png
+data/bird.png
+data/board.png
+data/bottom.png
+data/dice-1.png
+data/dice-2.png
+data/dice-3.png
+data/dice-4.png
+data/dice-5.png
+data/dice-6.png
+data/empty.png
+data/flag.png
+data/locked.png
+data/mine.png
+data/pipe bottom.png
+data/pipe top.png
+data/revealed.png
+data/unlocked.png
